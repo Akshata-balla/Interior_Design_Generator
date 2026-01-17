@@ -5,6 +5,7 @@ diffusers
 accelerate
 transformers
 google-genai
+google.generativea
 streamlit
 replicate
 Pillow
