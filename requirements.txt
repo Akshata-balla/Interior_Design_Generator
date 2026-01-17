@@ -2,6 +2,7 @@
 torch
 torchvision
 transformers
+google-generativeai
 streamlit
 replicate
 Pillow
