@@ -44,30 +44,31 @@ ent color palette,
 
 
 import streamlit as st
-import google.generativeai as genai
+from google import genai
 
 def analyze_room(image, style_pref):
     """
-    Connects to Gemini to provide design feedback.
+    Connects to Gemini 2.0 to provide design feedback.
     """
-    # Look for the API Key in Streamlit Secrets
+    # Pull the API Key from your Streamlit Secrets
     api_key = st.secrets.get("GOOGLE_API_KEY")
     
     if not api_key:
-        return "Please configure your GOOGLE_API_KEY in Streamlit Secrets to get AI advice."
+        return "API Key missing. Please add GOOGLE_API_KEY to your Streamlit Secrets."
 
     try:
-        genai.configure(api_key=api_key)
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        # The new 2026 Client syntax
+        client = genai.Client(api_key=api_key)
         
-        prompt = f"As a professional interior designer, look at this image and suggest how to achieve a {style_pref} style."
+        prompt = f"You are a professional interior designer. Analyze this room and suggest a {style_pref} transformation."
         
-        # If image is provided, send both prompt and image
-        if image:
-            response = model.generate_content([prompt, image])
-        else:
-            response = model.generate_content(prompt)
+        # Use the newest model version
+        response = client.models.generate_content(
+            model="gemini-2.0-flash",
+            contents=[prompt, image] if image else prompt
+        )
             
         return response.text
     except Exception as e:
-        return f"AI Agent is resting (Error: {str(e)})"
+        return f"Designer is currently unavailable: {str(e)}"
+
