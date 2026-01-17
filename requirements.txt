@@ -1,0 +1,10 @@
+# Web Framework
+streamlit
+
+# AI Model Connectivity (Replicate API)
+replicate
+
+# Image Processing
+Pillow
+requests
+
