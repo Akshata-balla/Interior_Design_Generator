@@ -1,3 +1,9 @@
+# top of app.py
+from theme_config_css import CSS_STYLES
+
+# Apply the style immediately after page config
+st.markdown(CSS_STYLES, unsafe_allow_html=True)
+
 import streamlit as st
 
 # 1. MUST be the first Streamlit command
