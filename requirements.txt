@@ -1,10 +1,7 @@
-# Web Framework
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch
+torchvision
 streamlit
-
-# AI Model Connectivity (Replicate API)
 replicate
-
-# Image Processing
 Pillow
 requests
-
