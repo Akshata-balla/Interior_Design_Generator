@@ -64,79 +64,32 @@ def display_about_tab():
 import streamlit as st
 
 def display_home_tab():
-    # Uses .main-header for the animated gradient effect
     st.markdown('<h1 class="main-header">AI Interior Design Studio</h1>', unsafe_allow_html=True)
-    
-    # Uses .feature-card for the 3D white card effect
-    st.markdown("""
-        <div class="feature-card">
-            <h3 style="color: #2c3e50; margin-top: 0;">Reimagine Your Living Space</h3>
-            <p>Leverage state-of-the-art AI to transform your room. Our system analyzes 
-            your architecture and applies professional design styles in seconds.</p>
-        </div>
-    """, unsafe_allow_html=True)
+    st.markdown('<div class="feature-card"><h3>Welcome</h3><p>Start by uploading a photo.</p></div>', unsafe_allow_html=True)
 
 def display_upload_tab(preprocessor):
-    st.markdown('<h2 class="sub-header">Step 1: Upload Your Space</h2>', unsafe_allow_html=True)
-    
-    # Custom container for the uploader
-    st.markdown('<div class="design-card">', unsafe_allow_html=True)
-    uploaded_file = st.file_uploader("Choose a high-quality photo of your room...", type=["jpg", "jpeg", "png"])
-    st.markdown('</div>', unsafe_allow_html=True)
+    st.markdown('<h2 class="sub-header">Step 1: Upload Your Space</h2>')
+    uploaded_file = st.file_uploader("Choose a photo...", type=["jpg", "jpeg", "png"])
     
     if uploaded_file is not None:
         processed_img = preprocessor.process(uploaded_file)
         st.session_state.uploaded_image = processed_img
-        st.image(processed_img, caption="Detected Room Layout", width="stretch", output_format="PNG")
-        st.markdown('<div class="success-box">✅ Image successfully analyzed!</div>', unsafe_allow_html=True)
+        # FIXED: Changed use_container_width=True to width="stretch"
+        st.image(processed_img, caption="Original Room", width="stretch")
 
 def display_design_tab():
-    st.markdown('<h2 class="sub-header">Step 2: Define Your Aesthetic</h2>', unsafe_allow_html=True)
-    
+    st.markdown('<h2 class="sub-header">Step 2: Aesthetic</h2>')
     if st.session_state.uploaded_image is None:
-        st.warning("Please upload a photo in the 'Upload' tab first.")
+        st.warning("Please upload a photo first.")
         return
-
-    col1, col2 = st.columns(2)
-    with col1:
-        st.markdown('<div class="info-box">', unsafe_allow_html=True)
-        style = st.selectbox("Select Design Theme", 
-                             ["Modern Minimalist", "Scandinavian", "Industrial Loft", "Bohemian", "Luxury Classic"])
-        st.markdown('</div>', unsafe_allow_html=True)
-    
-    with col2:
-        st.markdown('<div class="info-box">', unsafe_allow_html=True)
-        custom_prompt = st.text_input("Special Requests", placeholder="e.g., Add a marble coffee table...")
-        st.markdown('</div>', unsafe_allow_html=True)
+    st.selectbox("Style", ["Modern", "Industrial", "Bohemian"])
 
 def display_results_tab(generator, postprocessor, llm_designer_agent):
-    st.markdown('<h2 class="sub-header">Step 3: Final Transformation</h2>', unsafe_allow_html=True)
-    
-    if st.session_state.uploaded_image is None:
-        st.error("No image found. Please go back to the Upload tab.")
-        return
-
-    if st.button("Generate 3D Render"):
-        with st.spinner("AI Designer is calculating lighting and textures..."):
-            # This uses the .ai-description class for the italicized box
-            st.markdown(f"""
-                <div class="ai-description">
-                    "The AI Agent suggests focusing on the natural light from the left window 
-                    to highlight the new textures..."
-                </div>
-            """, unsafe_allow_html=True)
-            
-            # Placeholder for the actual generation logic
-            st.info("Generation process started...")
+    st.markdown('<h2 class="sub-header">Step 3: Results</h2>')
+    if st.button("Generate Design"):
+        # This calls the updated agent
+        advice = llm_designer_agent.analyze_room(st.session_state.uploaded_image, "Modern")
+        st.write(advice)
 
 def display_about_tab():
-    st.markdown("""
-        <div class="feature-card">
-            <h2 style="color: #3498db;">System Information</h2>
-            <p><b>Model:</b> Gemini 3 Flash & Stable Diffusion XL</p>
-            <p><b>Version:</b> 2026.1.0</p>
-            <hr>
-            <p>This tool is designed for interior designers and homeowners to 
-            visualize architectural changes instantly.</p>
-        </div>
-    """, unsafe_allow_html=True)
+    st.info("AI Interior Design v2026.1", width="stretch")
