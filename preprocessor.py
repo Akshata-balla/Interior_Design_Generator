@@ -74,7 +74,16 @@ def analyze_room_structure(image):
         'seg_visualization': seg_visualization
     }
 '''
+from PIL import Image
+from config import DEFAULT_IMAGE_SIZE
 
+def process(uploaded_file):
+    # This function is called by viewer.py
+    image = Image.open(uploaded_file).convert("RGB")
+    processed = image.resize(DEFAULT_IMAGE_SIZE)
+    return processed
+
+'''
 import requests
 from PIL import Image
 from io import BytesIO
@@ -87,3 +96,4 @@ def clean_up(image_url):
     response = requests.get(image_url)
     img = Image.open(BytesIO(response.content))
     return img
+'''
