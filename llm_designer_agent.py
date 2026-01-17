@@ -44,20 +44,16 @@ ent color palette,
 
 
 import streamlit as st
-from google import genai  # <--- This is the new 2026 way
+from config import get_ai_client
 
 def analyze_room(image, style_pref):
-    api_key = st.secrets.get("GOOGLE_API_KEY")
-    if not api_key:
-        return "Please add your GOOGLE_API_KEY to Streamlit Secrets."
-
     try:
-        # New Client-based architecture
-        client = genai.Client(api_key=api_key)
+        # Get the new 2026 Client
+        client = get_ai_client()
         
-        prompt = f"Act as an interior designer. Suggest how to turn this room into a {style_pref} style."
+        prompt = f"As an interior designer, suggest how to turn this room into a {style_pref} style."
         
-        # In 2026, we use gemini-2.0-flash for faster results
+        # Use the 2026 Gemini 2.0 Flash model
         response = client.models.generate_content(
             model="gemini-2.0-flash",
             contents=[prompt, image] if image else prompt
@@ -65,4 +61,4 @@ def analyze_room(image, style_pref):
             
         return response.text
     except Exception as e:
-        return f"AI is offline: {str(e)}"
+        return f"Designer Agent Error: {str(e)}"
