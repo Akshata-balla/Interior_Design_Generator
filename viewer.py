@@ -61,51 +61,53 @@ def display_about_tab():
     st.write("Created with Streamlit and Stable Diffusion.")
     st.write("This tool uses ControlNet architecture to maintain the structure of your room while changing the furniture and decor.")
 '''
-
 import streamlit as st
-import replicate
-import os
-from PIL import Image
-import requests
-from io import BytesIO
 
-# Set up page config
-st.set_page_config(page_title="AI Interior Designer", layout="centered")
+def display_home_tab():
+    st.markdown('<h1 class="main-header">AI Interior Design Generator</h1>', unsafe_allow_html=True)
+    st.markdown("""
+        <div class="feature-card">
+            <h2>Welcome to Your AI Design Studio</h2>
+            <p>Transform any room instantly using advanced AI. Upload a photo, 
+            choose a style, and let the designer agent do the rest.</p>
+        </div>
+    """, unsafe_allow_html=True)
 
-st.title("🏡 AI Interior Design Generator")
-st.write("Upload a photo of your room and describe your dream style!")
-
-# Sidebar for API Key
-with st.sidebar:
-    replicate_api = st.text_input("Enter Replicate API Token", type="password")
-    if not replicate_api:
-        st.warning("Please enter your Replicate API token to proceed.")
-        st.stop()
-    os.environ["REPLICATE_API_TOKEN"] = replicate_api
-
-# Input fields
-uploaded_file = st.file_uploader("Choose a room photo...", type=["jpg", "jpeg", "png"])
-prompt = st.text_input("Design Prompt", placeholder="e.g., a modern minimalist living room with wooden accents")
-
-if uploaded_file and prompt:
-    st.image(uploaded_file, caption="Original Room", use_column_width=True)
+def display_upload_tab(preprocessor):
+    st.markdown('<h2 class="sub-header">1. Upload Your Room Photo</h2>', unsafe_allow_html=True)
     
+    uploaded_file = st.file_uploader("Upload an image of the room you want to redesign", type=["jpg", "jpeg", "png"])
+    
+    if uploaded_file is not None:
+        # This calls the function in preprocessor.py
+        processed_img = preprocessor.process(uploaded_file)
+        st.session_state.uploaded_image = processed_img
+        
+        st.image(processed_img, caption="Original Room Photo", use_container_width=True)
+        st.success("Image uploaded and processed successfully! Move to the 'Design' tab.")
+
+def display_design_tab():
+    st.markdown('<h2 class="sub-header">2. Configure Your Design</h2>', unsafe_allow_html=True)
+    if st.session_state.uploaded_image is None:
+        st.warning("Please upload an image in the 'Upload' tab first.")
+        return
+
+    col1, col2 = st.columns(2)
+    with col1:
+        st.selectbox("Design Theme", ["Modern", "Scandinavian", "Industrial", "Bohemian", "Minimalist"])
+    with col2:
+        st.text_area("Specific Instructions", placeholder="e.g. Add a blue velvet sofa and oak flooring...")
+
+def display_results_tab(generator, postprocessor, llm_designer_agent):
+    st.markdown('<h2 class="sub-header">3. Your AI Transformation</h2>', unsafe_allow_html=True)
+    if st.session_state.uploaded_image is None:
+        st.error("Missing input image. Please upload one in the 'Upload' tab.")
+        return
+
     if st.button("Generate Design"):
-        with st.spinner("Transforming your space..."):
-            try:
-                # Call Replicate API (using a popular interior design model)
-                output = replicate.run(
-                    "adirik/interior-design:76604a15c357e8446d93e60ef2e69ffed8ef3d3d5f3074091e600869a0397576",
-                    input={
-                        "image": uploaded_file,
-                        "prompt": prompt,
-                        "guidance_scale": 7.5,
-                        "num_inference_steps": 50
-                    }
-                )
-                
-                # Display Result
-                if output:
-                    st.image(output[1], caption="AI Reimagined Design", use_column_width=True)
-            except Exception as e:
-                st.error(f"Error: {e}")
+        with st.spinner("AI Designer is reimagining your space..."):
+            # Logic for calling generator would go here
+            st.info("Generation logic triggered.")
+
+def display_about_tab():
+    st.markdown('<div class="info-box"><h3>About the AI Interior Designer</h3><p>Version 1.0.0 powered by Gemini and Stable Diffusion.</p></div>', unsafe_allow_html=True)
