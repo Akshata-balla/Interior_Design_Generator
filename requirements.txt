@@ -4,7 +4,7 @@ torchvision
 diffusers
 accelerate
 transformers
-google-generativeai
+google-genai        # <--- Use this instead of google-generativeai
 streamlit
 replicate
 Pillow
