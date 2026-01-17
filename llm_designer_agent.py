@@ -44,22 +44,30 @@ ent color palette,
 
 
 import streamlit as st
-from google import genai
+import google.generativeai as genai
 
-def describe_image_with_gemini(image):
-    """Analyzes the room image using Gemini 2.0 Flash."""
-    if "GOOGLE_API_KEY" in st.secrets:
-        try:
-            client = genai.Client(api_key=st.secrets["GOOGLE_API_KEY"])
-            response = client.models.generate_content(
-                model='gemini-2.0-flash',
-                contents=["Describe this room for an interior designer.", image]
-            )
-            return response.text
-        except Exception as e:
-            return f"Gemini Error: {e}"
-    return "API Key missing in Streamlit Secrets."
+def analyze_room(image, style_pref):
+    """
+    Connects to Gemini to provide design feedback.
+    """
+    # Look for the API Key in Streamlit Secrets
+    api_key = st.secrets.get("GOOGLE_API_KEY")
+    
+    if not api_key:
+        return "Please configure your GOOGLE_API_KEY in Streamlit Secrets to get AI advice."
 
-def enhance(style_name, user_prompt):
-    """Creates a detailed prompt for the image generator."""
-    return f"A high-quality {style_name} interior design. {user_prompt}. Photorealistic, 8k."
+    try:
+        genai.configure(api_key=api_key)
+        model = genai.GenerativeModel('gemini-1.5-flash')
+        
+        prompt = f"As a professional interior designer, look at this image and suggest how to achieve a {style_pref} style."
+        
+        # If image is provided, send both prompt and image
+        if image:
+            response = model.generate_content([prompt, image])
+        else:
+            response = model.generate_content(prompt)
+            
+        return response.text
+    except Exception as e:
+        return f"AI Agent is resting (Error: {str(e)})"
