@@ -10,3 +10,4 @@ replicate
 Pillow
 requests
 numpy
+opencv-python-headless
