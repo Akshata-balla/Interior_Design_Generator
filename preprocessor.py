@@ -1,4 +1,4 @@
-
+'''
 import torch
 import numpy as np
 from PIL import Image
@@ -73,3 +73,17 @@ def analyze_room_structure(image):
         'seg_map': seg_map,
         'seg_visualization': seg_visualization
     }
+'''
+
+import requests
+from PIL import Image
+from io import BytesIO
+
+def clean_up(image_url):
+    """
+    Downloads the generated image from the URL so it can be 
+    displayed and saved in the Streamlit app.
+    """
+    response = requests.get(image_url)
+    img = Image.open(BytesIO(response.content))
+    return img
