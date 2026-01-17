@@ -1,22 +1,34 @@
 import streamlit as st
-from theme_config_css import CSS_STYLES
-from viewer import display_home_tab, display_upload_tab, display_design_tab, display_results_tab, display_about_tab
-import preprocessor
-import generator
-import postprocessor
-import llm_designer_agent
 
-# Apply CSS styles
-st.markdown(CSS_STYLES, unsafe_allow_html=True)
-
-# ----------------- Streamlit UI ----------------- #
+# 1. MUST be the first Streamlit command
 st.set_page_config(
     page_title="AI Interior Design Generator", 
     layout="wide",
     initial_sidebar_state="collapsed"
 )
 
-# Initialize session state
+# 2. Local Imports (Ensure these files are in your GitHub root folder)
+try:
+    from theme_config_css import CSS_STYLES
+    from viewer import (
+        display_home_tab, 
+        display_upload_tab, 
+        display_design_tab, 
+        display_results_tab, 
+        display_about_tab
+    )
+    import preprocessor
+    import generator
+    import postprocessor
+    import llm_designer_agent
+except ImportError as e:
+    st.error(f"Missing File Error: {e}")
+    st.stop()
+
+# 3. Apply CSS styles
+st.markdown(CSS_STYLES, unsafe_allow_html=True)
+
+# 4. Initialize session state
 if 'uploaded_image' not in st.session_state:
     st.session_state.uploaded_image = None
 if 'segmentation_done' not in st.session_state:
@@ -30,7 +42,7 @@ if 'seg_visualization' not in st.session_state:
 if 'generated_images' not in st.session_state:
     st.session_state.generated_images = []
 
-# Tab structure
+# 5. Tab structure
 tab_home, tab1, tab2, tab3, tab_about = st.tabs(["Home", "Upload", "Design", "Results", "About"])
 
 with tab_home:
