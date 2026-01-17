@@ -42,6 +42,8 @@ def generate_design_with_controlnet(prompt, input_image, depth_image, negative_p
     
     return result
 '''
+
+'''
 import replicate
 import streamlit as st
 import os
@@ -70,4 +72,16 @@ def generate(uploaded_image, prompt):
     )
     
     # Replicate returns a list of URLs; the second one is usually the final result
+    return output[1] if len(output) > 1 else output[0]
+    '''
+
+import replicate
+import streamlit as st
+
+def generate(image, prompt):
+    # Uses Replicate API to generate the design
+    output = replicate.run(
+        "adirik/interior-design:76604a15c357e8446d93e60ef2e69ffed8ef3d3d5f3074091e600869a0397576",
+        input={"image": image, "prompt": prompt}
+    )
     return output[1] if len(output) > 1 else output[0]
