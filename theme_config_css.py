@@ -1,4 +1,4 @@
-CSS_STYLES = """
+CSS_STYLES = 
 <style>
     /* Main styling - Enhanced Clean White Theme */
     .main {
@@ -567,4 +567,4 @@ CSS_STYLES = """
         100% { transform: translateY(-100vh) translateX(100px); }
     }
 </style>
-"""
+
