@@ -1,4 +1,4 @@
-import torch
+'''import torch
 from diffusers import StableDiffusionControlNetPipeline, ControlNetModel
 from config import CONTROLNET_MODEL, STABLE_DIFFUSION_MODEL, DEFAULT_NUM_INFERENCE_STEPS, DEFAULT_GUIDANCE_SCALE
 
@@ -41,3 +41,33 @@ def generate_design_with_controlnet(prompt, input_image, depth_image, negative_p
     ).images[0]
     
     return result
+'''
+import replicate
+import streamlit as st
+import os
+
+def generate(uploaded_image, prompt):
+    """
+    Sends the room photo and prompt to the Replicate API 
+    to generate the new interior design.
+    """
+    # Ensure the API token is set from Streamlit Secrets
+    if "REPLICATE_API_TOKEN" in st.secrets:
+        os.environ["REPLICATE_API_TOKEN"] = st.secrets["REPLICATE_API_TOKEN"]
+    else:
+        raise ValueError("Missing REPLICATE_API_TOKEN in Streamlit Secrets")
+
+    # We use a specialized Interior Design ControlNet model
+    # Model: adirik/interior-design
+    output = replicate.run(
+        "adirik/interior-design:76604a15c357e8446d93e60ef2e69ffed8ef3d3d5f3074091e600869a0397576",
+        input={
+            "image": uploaded_image,
+            "prompt": prompt,
+            "guidance_scale": 7.5,
+            "num_inference_steps": 50
+        }
+    )
+    
+    # Replicate returns a list of URLs; the second one is usually the final result
+    return output[1] if len(output) > 1 else output[0]
