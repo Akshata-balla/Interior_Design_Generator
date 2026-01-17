@@ -1,12 +1,6 @@
-# top of app.py
-from theme_config_css import CSS_STYLES
-
-# Apply the style immediately after page config
-st.markdown(CSS_STYLES, unsafe_allow_html=True)
-
 import streamlit as st
 
-# 1. MUST be the first Streamlit command
+# 1. MUST be the first Streamlit command - No exceptions!
 st.set_page_config(
     page_title="AI Interior Design Generator", 
     layout="wide",
@@ -31,7 +25,7 @@ except ImportError as e:
     st.error(f"Missing File Error: {e}")
     st.stop()
 
-# 3. Apply CSS styles
+# 3. Apply CSS styles (Now that page config is set, we can apply CSS)
 st.markdown(CSS_STYLES, unsafe_allow_html=True)
 
 # 4. Initialize session state
