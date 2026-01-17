@@ -87,7 +87,7 @@ def display_upload_tab(preprocessor):
     if uploaded_file is not None:
         processed_img = preprocessor.process(uploaded_file)
         st.session_state.uploaded_image = processed_img
-        st.image(processed_img, caption="Detected Room Layout", use_container_width=True, output_format="PNG")
+        st.image(processed_img, caption="Detected Room Layout", width="stretch", output_format="PNG")
         st.markdown('<div class="success-box">✅ Image successfully analyzed!</div>', unsafe_allow_html=True)
 
 def display_design_tab():
