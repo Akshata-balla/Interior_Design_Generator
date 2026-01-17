@@ -44,25 +44,20 @@ ent color palette,
 
 
 import streamlit as st
-from google import genai
+from google import genai  # <--- This is the new 2026 way
 
 def analyze_room(image, style_pref):
-    """
-    Connects to Gemini 2.0 to provide design feedback.
-    """
-    # Pull the API Key from your Streamlit Secrets
     api_key = st.secrets.get("GOOGLE_API_KEY")
-    
     if not api_key:
-        return "API Key missing. Please add GOOGLE_API_KEY to your Streamlit Secrets."
+        return "Please add your GOOGLE_API_KEY to Streamlit Secrets."
 
     try:
-        # The new 2026 Client syntax
+        # New Client-based architecture
         client = genai.Client(api_key=api_key)
         
-        prompt = f"You are a professional interior designer. Analyze this room and suggest a {style_pref} transformation."
+        prompt = f"Act as an interior designer. Suggest how to turn this room into a {style_pref} style."
         
-        # Use the newest model version
+        # In 2026, we use gemini-2.0-flash for faster results
         response = client.models.generate_content(
             model="gemini-2.0-flash",
             contents=[prompt, image] if image else prompt
@@ -70,5 +65,4 @@ def analyze_room(image, style_pref):
             
         return response.text
     except Exception as e:
-        return f"Designer is currently unavailable: {str(e)}"
-
+        return f"AI is offline: {str(e)}"
