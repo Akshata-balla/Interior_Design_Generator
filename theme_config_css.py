@@ -2,85 +2,135 @@
 
 CSS_STYLES = """
 <style>
-    /* 1. Fix the "Too Blue" problem by using a Neutral Dark Base */
+    /* 1. Base Structure - Deep Charcoal instead of Blue to fix "too blue" issue */
     .stApp {
-        background-color: #121212; /* Neutral Deep Charcoal */
+        background: #121212; 
         background-image: radial-gradient(circle at 20% 20%, #080742 0%, #121212 100%);
         background-attachment: fixed;
+        color: #ffffff;
     }
 
-    /* 2. Vibrant Multi-Color Header */
+    /* 2. Main Header - Animated Multi-Tone Gradient */
     .main-header {
         font-size: 3.8rem;
-        background: linear-gradient(to right, #5872EE, #FF8B8B, #FFBC94);
+        background: linear-gradient(45deg, #5872EE, #FF8B8B, #FFBC94, #5872EE);
+        background-size: 400% 400%;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         text-align: center;
-        font-weight: 800;
         margin-bottom: 2rem;
+        font-weight: 800;
+        padding: 1rem;
+        animation: gradientShift 8s ease infinite;
     }
     
-    /* 3. High Contrast Sub-headers */
+    @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    
+    /* 3. Sub-header - Sharp Square Left Border (Peach Accent) */
     .sub-header {
-        font-size: 2rem;
-        color: #FFBC94; /* Peach text for warmth */
-        border-left: 5px solid #FF8B8B; /* Coral side-border instead of bottom */
-        padding-left: 15px;
-        margin: 2rem 0;
+        font-size: 2.2rem;
+        color: #FFBC94; 
+        border-left: 6px solid #FF8B8B;
+        padding-left: 20px;
+        margin-bottom: 2rem;
         font-weight: 600;
+        background: rgba(255, 255, 255, 0.03);
     }
     
-    /* 4. Square-ish Tabs (Removed Circles) */
+    /* 4. Sharp Square Tabs - Fixed Right Space and Shapes */
     .stTabs [data-baseweb="tab-list"] {
-        gap: 10px;
-        background: #1E1E1E; /* Dark Grey surface */
-        padding: 8px;
-        border-radius: 4px; /* Square edges */
+        gap: 8px;
+        background: #1E1E1E;
+        padding: 10px;
+        border-radius: 4px; /* Sharp edges */
         border: 1px solid #333333;
+        width: fit-content !important;
     }
     
     .stTabs [data-baseweb="tab"] {
-        height: 45px;
-        background-color: transparent !important;
-        border-radius: 4px !important;
+        height: 50px;
+        background: #252525 !important;
+        border-radius: 4px !important; /* Square shape */
+        padding: 10px 25px;
         color: #888888 !important;
         font-weight: 600;
-        transition: all 0.2s ease;
-    }
-
-    /* Square Selection Highlight with Coral Underline */
-    .stTabs [aria-selected="true"] {
-        background-color: rgba(88, 114, 238, 0.15) !important; /* Soft Blue Square Tint */
-        color: #FFBC94 !important; /* Peach Text */
-        border-bottom: 3px solid #FF8B8B !important; /* Sharp Coral Underline */
-    }
-
-    /* 5. Feature Cards with Distinct Colors */
-    .feature-card {
-        background: #1E1E1E; 
-        color: #FFFFFF;
-        padding: 2rem;
-        border-radius: 8px; /* Square-ish */
-        border: 1px solid #333333;
-        box-shadow: 10px 10px 0px #FF8B8B; /* Retro Sharp Offset Shadow */
+        transition: all 0.3s ease;
+        border: 1px solid transparent !important;
     }
     
-    /* 6. AI Results Box - Multi-Tone Glass */
+    .stTabs [data-baseweb="tab"]:hover {
+        color: #5872EE !important;
+        background: #2A2A2A !important;
+    }
+
+    /* Active Tab - Coral Underline with Blue Tint */
+    .stTabs [aria-selected="true"] {
+        background: rgba(88, 114, 238, 0.15) !important;
+        color: #FFBC94 !important;
+        border-bottom: 4px solid #FF8B8B !important; /* Square sharp underline */
+    }
+
+    /* 5. Feature Cards - Square with Retro Shadow */
+    .feature-card {
+        background: #1E1E1E;
+        color: #ffffff;
+        padding: 2.5rem;
+        border-radius: 4px; /* Square */
+        margin: 1.5rem 0;
+        border: 1px solid #333333;
+        box-shadow: 8px 8px 0px #5872EE; /* Sharp Offset Shadow */
+        transition: all 0.3s ease;
+    }
+    
+    .feature-card:hover {
+        transform: translate(-4px, -4px);
+        box-shadow: 12px 12px 0px #FF8B8B; /* Switches color on hover */
+    }
+
+    /* 6. AI Results Box - Square Glass Morphism */
     .ai-description {
         background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 188, 148, 0.3);
-        border-top: 4px solid #5872EE; /* Blue top */
-        border-bottom: 4px solid #FF8B8B; /* Coral bottom */
+        border-left: 5px solid #FFBC94;
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
         padding: 2rem;
-        border-radius: 4px;
+        border-radius: 0px; /* Fully square */
+        margin: 1.5rem 0;
+        font-style: italic;
         color: #E0E0E0;
     }
 
-    /* Fix for Selectboxes and Inputs */
+    /* 7. Enhanced Buttons - Square and Bold */
+    .stButton button {
+        background: linear-gradient(135deg, #FF8B8B, #FFBC94);
+        color: #080742; /* Dark text for contrast */
+        border: none;
+        padding: 12px 30px;
+        border-radius: 4px; /* Square */
+        font-weight: 700;
+        box-shadow: 4px 4px 0px #5872EE;
+        transition: all 0.2s ease;
+    }
+    
+    .stButton button:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 6px 6px 0px #ffffff;
+        background: linear-gradient(135deg, #FFBC94, #FF8B8B);
+    }
+
+    /* Inputs and Selectors */
     .stSelectbox div[data-baseweb="select"] {
         background-color: #1E1E1E;
-        border: 1px solid #FFBC94;
+        border: 1px solid #333333;
+        border-radius: 4px;
         color: white;
+    }
+    
+    .stSelectbox div[data-baseweb="select"]:focus {
+        border-color: #FFBC94;
     }
 </style>
 """
