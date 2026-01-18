@@ -101,14 +101,14 @@ st.markdown(CSS_STYLES, unsafe_allow_html=True)
 # --- NEW HEADER SECTION ---
 # This adds the left-aligned title and slogan using your requested palette
 st.markdown('''
-    <div style="text-align: left; padding: 10px 0px 20px 0px; margin-bottom: 20px; border-bottom: 3px solid #38A3A5;">
+<div style="text-align: left; padding: 10px 0px 20px 0px; margin-bottom: 20px; border-bottom: 3px solid #38A3A5;">
         <h1 style="color: #000000; font-size: 3rem; margin-bottom: 0px; font-weight: 800;">
             🏠 SmartSpace AI
         </h1>
         <p style="color: #225A5E; font-size: 1.2rem; font-weight: 600; margin-top: 5px;">
             Smarter design for modern living.
         </p>
-    </div>
+</div>
 ''', unsafe_allow_html=True)
 # ---------------------------
 '''
