@@ -23,7 +23,7 @@ LABELS = ["wall", "floor", "ceiling", "furniture"]
 
 import streamlit as st
 from google import genai  # Modern 2026 import
-
+'''
 # config.py
 
 # --- AI Model Configurations ---
@@ -50,7 +50,7 @@ PALETTE = {
 # Metrics we discussed for testing accuracy
 TARGET_MIOU = 0.80             # Segmentation Goal
 TARGET_RMSE_MAX = 0.05         # Depth Error Limit
-
+'''
 # This replaces the old genai.configure()
 def get_ai_client():
     api_key = st.secrets.get("GOOGLE_API_KEY")
