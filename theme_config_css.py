@@ -2,23 +2,23 @@
 
 CSS_STYLES = """
 <style>
-    /* 1. Main Background - Clean White */
+    /* 1. New Background - Soft Frosted Lavender (Ensures 100% text visibility) */
     .stApp {
-        background: #ffffff;
+        background-color: #f3f0f7;
+        background-image: linear-gradient(180deg, #f3f0f7 0%, #e8e4f0 100%);
         background-attachment: fixed;
     }
 
-    /* 2. Animated Gradient Header - Original Colors (#2c3e50, #3498db, #9b59b6, #e74c3c) */
+    /* 2. Main Header - Gradient using your full palette */
     .main-header {
         font-size: 3.5rem;
-        background: linear-gradient(45deg, #2c3e50, #3498db, #9b59b6, #e74c3c);
+        background: linear-gradient(45deg, #0B0742, #5A72EE, #9983CF, #FF918B);
         background-size: 400% 400%;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         text-align: center;
         margin-bottom: 2rem;
-        font-weight: 700;
-        padding: 1rem;
+        font-weight: 800;
         animation: gradientShift 8s ease infinite;
     }
     
@@ -28,96 +28,95 @@ CSS_STYLES = """
         100% { background-position: 0% 50%; }
     }
     
-    /* 3. Sub-header - Sharp Square Left Border */
+    /* 3. Sub-header - Sharp Square with Lavender Accent */
     .sub-header {
-        font-size: 2rem;
-        color: #2c3e50;
-        border-left: 8px solid #3498db; /* Sharp Square Accent */
-        padding-left: 15px;
-        margin-bottom: 2rem;
-        font-weight: 600;
-        background: #f8f9fa;
+        font-size: 1.8rem;
+        color: #0B0742; /* Deep Navy for maximum legibility */
+        border-left: 10px solid #9983CF; /* Lavender from your image */
+        padding: 10px 20px;
+        margin-bottom: 1.5rem;
+        font-weight: 700;
+        background: rgba(255, 255, 255, 0.6);
     }
     
-    /* 4. Square Tabs - No Circles, Clean Lines */
+    /* 4. Square Tabs - Clean and Professional */
     .stTabs [data-baseweb="tab-list"] {
-        gap: 0px; /* Merged square look */
-        background: #f8f9fa;
+        gap: 0px;
+        background: #dcd6e8;
         padding: 0px;
         border-radius: 0px; 
-        border: 1px solid #e1e8ed;
-        width: fit-content !important;
+        border: 1px solid #c8bed9;
     }
     
     .stTabs [data-baseweb="tab"] {
-        height: 55px;
+        height: 50px;
         background: #ffffff !important;
-        border-radius: 0px !important; /* Forces Square */
-        padding: 10px 25px;
-        color: #2c3e50 !important;
-        font-weight: 600;
-        border: 1px solid #e1e8ed !important;
-        margin: 0px !important;
-    }
-    
-    /* Square Selection Highlight with Original Blue Underline */
-    .stTabs [aria-selected="true"] {
-        background: #3498db !important;
-        color: white !important;
-        border-bottom: 4px solid #2c3e50 !important;
+        border-radius: 0px !important; 
+        padding: 10px 30px;
+        color: #0B0742 !important;
+        font-weight: 700;
+        border: 1px solid #c8bed9 !important;
     }
 
-    /* 5. Feature Cards - Original White/Gray Gradient with Square Corners */
+    /* Active Tab - Deep Navy with Sky Blue Bottom Border */
+    .stTabs [aria-selected="true"] {
+        background: #0B0742 !important;
+        color: #ffffff !important;
+        border-bottom: 5px solid #5A72EE !important;
+    }
+
+    /* 5. Feature Cards - High Contrast White */
     .feature-card {
-        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-        color: #2c3e50;
+        background: #ffffff;
+        color: #0B0742;
         padding: 2.5rem;
-        border-radius: 0px; /* Sharp Square */
+        border-radius: 0px; 
         margin: 1.5rem 0;
-        box-shadow: 10px 10px 0px #3498db; /* Sharp offset shadow */
-        border: 1px solid #e1e8ed;
+        border: 1px solid #c8bed9;
+        box-shadow: 8px 8px 0px #9983CF; /* Lavender Shadow */
         transition: all 0.3s ease;
     }
     
     .feature-card:hover {
-        transform: translate(-5px, -5px);
-        box-shadow: 15px 15px 0px #e74c3c; /* Red highlight on hover */
+        transform: translate(-4px, -4px);
+        box-shadow: 12px 12px 0px #FF918B; /* Coral Shadow on hover */
     }
 
-    /* 6. AI Description Box - Square & Clean */
-    .ai-description {
-        background: #f8f9fa;
-        border: 1px solid #e1e8ed;
-        border-left: 10px solid #3498db;
-        padding: 2rem;
+    /* 6. Info Box - Using the Lavender Theme */
+    .info-box {
+        background: #ffffff;
+        border: 1px solid #c8bed9;
+        border-left: 10px solid #5A72EE;
+        padding: 1.5rem;
         border-radius: 0px;
-        font-style: italic;
-        color: #2c3e50;
+        color: #0B0742;
+        font-weight: 500;
     }
 
     /* 7. Enhanced Square Buttons */
     .stButton button {
-        background: #3498db;
+        background: #0B0742;
         color: white;
         border: none;
-        padding: 15px 35px;
-        border-radius: 0px; /* Sharp Square */
-        font-weight: 600;
-        box-shadow: 5px 5px 0px #2c3e50;
+        padding: 12px 40px;
+        border-radius: 0px;
+        font-weight: 700;
+        box-shadow: 4px 4px 0px #9983CF;
         transition: all 0.2s ease;
     }
     
     .stButton button:hover {
-        background: #e74c3c;
-        transform: translate(-2px, -2px);
-        box-shadow: 7px 7px 0px #2c3e50;
+        background: #5A72EE;
+        transform: translateY(-2px);
+        box-shadow: 6px 6px 0px #0B0742;
     }
 
-    /* Input fields - Original styling but Square */
-    .stTextArea textarea, .stTextInput input {
+    /* 8. Input visibility fix */
+    .stSelectbox div[data-baseweb="select"], .stTextArea textarea, .stTextInput input {
+        background-color: white !important;
+        color: #0B0742 !important;
         border-radius: 0px !important;
-        border: 2px solid #e1e8ed;
-        background: #ffffff;
+        border: 1px solid #c8bed9 !important;
     }
 </style>
 """
