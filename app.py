@@ -64,6 +64,12 @@ with tab_about:
 
 import streamlit as st
 
+import base64
+
+def get_base64_image(image_path):
+    with open(image_path, "rb") as img_file:
+        return base64.b64encode(img_file.read()).decode()
+
 # 1. MUST be the first Streamlit command - No exceptions!
 st.set_page_config(
     page_title="AI Interior Design Generator", 
@@ -88,7 +94,7 @@ try:
 except ImportError as e:
     st.error(f"Missing File Error: {e}")
     st.stop()
-
+'''
 # 3. Apply CSS styles
 st.markdown(CSS_STYLES, unsafe_allow_html=True)
 
@@ -105,6 +111,32 @@ st.markdown('''
     </div>
 ''', unsafe_allow_html=True)
 # ---------------------------
+'''
+# 3. Apply CSS styles
+st.markdown(CSS_STYLES, unsafe_allow_html=True)
+
+# --- UPDATED HEADER SECTION WITH LOCAL IMAGE ---
+try:
+    # Convert local logo to base64
+    logo_base64 = get_base64_image("logo.webp")
+    
+    st.markdown(f'''
+        <div style="display: flex; align-items: center; text-align: left; padding: 10px 0px 20px 0px; margin-bottom: 20px; border-bottom: 3px solid #38A3A5;">
+            <img src="data:image/webp;base64,{logo_base64}" style="width: 80px; height: 80px; margin-right: 20px; border-radius: 0px;">
+            <div>
+                <h1 style="color: #000000; font-size: 3rem; margin-bottom: 0px; font-weight: 800; line-height: 1;">
+                    SmartSpace AI
+                </h1>
+                <p style="color: #225A5E; font-size: 1.2rem; font-weight: 600; margin-top: 5px; margin-bottom: 0px;">
+                    Smarter design for modern living.
+                </p>
+            </div>
+        </div>
+    ''', unsafe_allow_html=True)
+except FileNotFoundError:
+    # Fallback if logo is missing
+    st.warning("Logo file 'logo.webp' not found. Please ensure it is in the app directory.")
+
 
 # 4. Initialize session state
 if 'uploaded_image' not in st.session_state:
