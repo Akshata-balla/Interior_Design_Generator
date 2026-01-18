@@ -24,13 +24,32 @@ LABELS = ["wall", "floor", "ceiling", "furniture"]
 import streamlit as st
 from google import genai  # Modern 2026 import
 
+# config.py
 
+# --- AI Model Configurations ---
+# The specific ControlNet model for structural/depth understanding
+CONTROLNET_MODEL = "lllyasviel/sd-controlnet-depth"
 
-# Add this line at the top or under your model settings
-CONTROLNET_MODEL = "lllyasviel/sd-controlnet-depth" 
+# Default generation settings
+DEFAULT_IMAGE_SIZE = (1024, 1024)
+NUM_INFERENCE_STEPS = 30
+GUIDANCE_SCALE = 7.5
 
-# If you prefer Canny (edge detection) instead of Depth:
-# CONTROLNET_MODEL = "lllyasviel/sd-controlnet-canny"
+# --- Emerald & Mint Theme Palette ---
+# Use these constants throughout your app for consistency
+PALETTE = {
+    "light_green": "#80ED99",  # Background
+    "emerald": "#57CC99",      # Accents/Secondary
+    "verdigris": "#38A3A5",    # Borders/Lines
+    "dark_green": "#225A5E",   # Slogans/Text
+    "black": "#000000",        # Main Titles
+    "white": "#FFFFFF"         # Buttons/Cards
+}
+
+# --- Model Evaluation Targets ---
+# Metrics we discussed for testing accuracy
+TARGET_MIOU = 0.80             # Segmentation Goal
+TARGET_RMSE_MAX = 0.05         # Depth Error Limit
 
 # This replaces the old genai.configure()
 def get_ai_client():
