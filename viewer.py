@@ -59,10 +59,9 @@ def display_about_tab():
     st.header("ℹ️ About this Project")
     st.write("Created with Streamlit and Stable Diffusion.")
     st.write("This tool uses ControlNet architecture to maintain the structure of your room while changing the furniture and decor.")
-
-
-
 '''
+
+
 import streamlit as st
 
 def display_home_tab():
@@ -98,4 +97,3 @@ def display_about_tab():
     st.header("ℹ️ About this Project")
     st.info("AI Interior Design v2026.1", width="stretch")
     st.write("Created with Streamlit and Stable Diffusion.")
-'''
