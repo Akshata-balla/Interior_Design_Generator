@@ -64,25 +64,26 @@ def display_about_tab():
 import streamlit as st
 
 def display_home_tab():
-    st.markdown('<h1 class="main-header">AI Interior Design Studio</h1>', unsafe_allow_html=True)
-    st.markdown('<div class="feature-card"><h3>Welcome</h3><p>Start by uploading a photo.</p></div>', unsafe_allow_html=True)
+    st.header("🏠 Welcome to AI Interior Designer")
+    st.write("Transform your space using the power of AI.")
+    st.info("Start by navigating to the **Upload** tab to provide a photo of your room.")
 
 def display_upload_tab(preprocessor):
-    st.markdown('<h2 class="sub-header">Step 1: Upload Your Space</h2>')
+    st.write('<h2 class="sub-header">Step 1: 📸 Upload Your Room</h2>')
     uploaded_file = st.file_uploader("Choose a photo...", type=["jpg", "jpeg", "png"])
     
     if uploaded_file is not None:
         processed_img = preprocessor.process(uploaded_file)
         st.session_state.uploaded_image = processed_img
-        # FIXED: Changed use_container_width=True to width="stretch"
         st.image(processed_img, caption="Original Room", width="stretch")
 
 def display_design_tab():
-    st.markdown('<h2 class="sub-header">Step 2: Aesthetic</h2>')
+    st.write('<h2 class="sub-header">Step 2: 🎨 Choose Your Style</h2>')
     if st.session_state.uploaded_image is None:
         st.warning("Please upload a photo first.")
         return
-    st.selectbox("Style", ["Modern", "Industrial", "Bohemian"])
+    st.selectbox("Style", ["Modern", "Minimalist", "Industrial", "Bohemian", "Scandinavian"])
+    
 
 def display_results_tab(generator, postprocessor, llm_designer_agent):
     st.markdown('<h2 class="sub-header">Step 3: Results</h2>')
@@ -92,4 +93,6 @@ def display_results_tab(generator, postprocessor, llm_designer_agent):
         st.write(advice)
 
 def display_about_tab():
+    st.header("ℹ️ About this Project")
     st.info("AI Interior Design v2026.1", width="stretch")
+    st.write("Created with Streamlit and Stable Diffusion.")
