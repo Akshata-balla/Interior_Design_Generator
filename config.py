@@ -24,6 +24,14 @@ LABELS = ["wall", "floor", "ceiling", "furniture"]
 import streamlit as st
 from google import genai  # Modern 2026 import
 
+
+
+# Add this line at the top or under your model settings
+CONTROLNET_MODEL = "lllyasviel/sd-controlnet-depth" 
+
+# If you prefer Canny (edge detection) instead of Depth:
+# CONTROLNET_MODEL = "lllyasviel/sd-controlnet-canny"
+
 # This replaces the old genai.configure()
 def get_ai_client():
     api_key = st.secrets.get("GOOGLE_API_KEY")
