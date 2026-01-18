@@ -1,4 +1,4 @@
-
+'''
 import torch
 from diffusers import StableDiffusionControlNetPipeline, ControlNetModel
 from config import CONTROLNET_MODEL, STABLE_DIFFUSION_MODEL, DEFAULT_NUM_INFERENCE_STEPS, DEFAULT_GUIDANCE_SCALE
@@ -42,9 +42,9 @@ def generate_design_with_controlnet(prompt, input_image, depth_image, negative_p
     ).images[0]
     
     return result
-
-
 '''
+
+
 import replicate
 import streamlit as st
 
@@ -55,4 +55,4 @@ def generate(image, prompt):
         input={"image": image, "prompt": prompt}
     )
     return output[1] if len(output) > 1 else output[0]
-'''
+
