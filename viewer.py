@@ -1,4 +1,4 @@
-import streamlit as st
+'''import streamlit as st
 
 def display_home_tab():
     st.header("🏠 Welcome to AI Interior Designer")
