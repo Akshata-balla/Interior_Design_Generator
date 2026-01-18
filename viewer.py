@@ -78,7 +78,7 @@ def display_upload_tab(preprocessor):
         st.image(processed_img, caption="Original Room", width="stretch")
 
 def display_design_tab():
-    st.markdown('<h2 class="sub-header">Step 2: 🎨 Choose Your Style</h2>',  unsafe_allow_html=True)
+    st.markdown('<h2 class="sub-header"> 🎨 Choose Your Style</h2>',  unsafe_allow_html=True)
     if st.session_state.uploaded_image is None:
         st.warning("Please upload a photo first.")
         return
