@@ -94,7 +94,7 @@ try:
 except ImportError as e:
     st.error(f"Missing File Error: {e}")
     st.stop()
-'''
+
 # 3. Apply CSS styles
 st.markdown(CSS_STYLES, unsafe_allow_html=True)
 
@@ -112,44 +112,6 @@ st.markdown('''
 </div>
 ''', unsafe_allow_html=True)
 # ---------------------------
-'''
-# 3. Apply CSS styles
-st.markdown(CSS_STYLES, unsafe_allow_html=True)
-
-# --- HELPER TO LOAD LOGO ---
-import base64
-def get_base64(path):
-    try:
-        with open(path, "rb") as f:
-            return base64.b64encode(f.read()).decode()
-    except:
-        return None
-
-logo_data = get_base64("logo.webp")
-
-# --- HEADER SECTION ---
-# This block is pure Python, the HTML is safely inside the f-string
-if logo_data:
-    header_html = f'''
-    <div style="display: flex; align-items: center; text-align: left; padding: 10px 0px 20px 0px; margin-bottom: 20px; border-bottom: 3px solid #38A3A5;">
-        <img src="data:image/webp;base64,{logo_data}" style="width: 80px; height: 80px; margin-right: 20px;">
-        <div>
-            <h1 style="color: #000000; font-size: 3rem; margin: 0; font-weight: 800; line-height: 1;">SmartSpace AI</h1>
-            <p style="color: #225A5E; font-size: 1.2rem; font-weight: 600; margin: 5px 0 0 0;">Smarter design for modern living.</p>
-        </div>
-    </div>
-    '''
-else:
-    header_html = '''
-    <div style="display: flex; align-items: center; text-align: left; padding: 10px 0px 20px 0px; margin-bottom: 20px; border-bottom: 3px solid #38A3A5;">
-        <h1 style="color: #000000; font-size: 3rem; margin: 0; font-weight: 800; line-height: 1;">SmartSpace AI</h1>
-        <div style="margin-left: 20px;">
-            <p style="color: #225A5E; font-size: 1.2rem; font-weight: 600; margin: 5px 0 0 0;">Smarter design for modern living.</p>
-        </div>
-    </div>
-    '''
-
-st.markdown(header_html, unsafe_allow_html=True)
 
 # 4. Initialize session state
 if 'uploaded_image' not in st.session_state:
