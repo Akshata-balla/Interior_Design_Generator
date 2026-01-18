@@ -64,20 +64,14 @@ with tab_about:
 
 import streamlit as st
 
-import base64
-
-def get_base64_image(image_path):
-    with open(image_path, "rb") as img_file:
-        return base64.b64encode(img_file.read()).decode()
-
-# 1. MUST be the first Streamlit command - No exceptions!
+# 1. MUST be the first Streamlit command
 st.set_page_config(
     page_title="AI Interior Design Generator", 
     layout="wide",
     initial_sidebar_state="collapsed"
 )
 
-# 2. Local Imports (Ensure these files are in your GitHub root folder)
+# 2. Local Imports
 try:
     from theme_config_css import CSS_STYLES
     from viewer import (
@@ -98,20 +92,17 @@ except ImportError as e:
 # 3. Apply CSS styles
 st.markdown(CSS_STYLES, unsafe_allow_html=True)
 
-# --- NEW HEADER SECTION ---
-# This adds the left-aligned title and slogan using your requested palette
+# --- HEADER SECTION (Text Only) ---
 st.markdown('''
-
 <div style="text-align: left; padding: 10px 0px 20px 0px; margin-bottom: 20px; border-bottom: 3px solid #38A3A5;">
-        <h1 style="color: #000000; font-size: 3rem; margin-bottom: 0px; font-weight: 800;">
-            SmartSpace AI
-        </h1>
-        <p style="color: #225A5E; font-size: 1.2rem; font-weight: 600; margin-top: 5px;">
-            Smarter design for modern living.
-        </p>
+    <h1 style="color: #000000; font-size: 3rem; margin: 0; font-weight: 800; line-height: 1.1;">
+        SmartSpace AI
+    </h1>
+    <p style="color: #225A5E; font-size: 1.2rem; font-weight: 600; margin-top: 5px;">
+        Smarter design for modern living.
+    </p>
 </div>
 ''', unsafe_allow_html=True)
-# ---------------------------
 
 # 4. Initialize session state
 if 'uploaded_image' not in st.session_state:
