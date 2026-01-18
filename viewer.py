@@ -69,7 +69,7 @@ def display_home_tab():
     st.info("Start by navigating to the **Upload** tab to provide a photo of your room.")
 
 def display_upload_tab(preprocessor):
-    st.write('<h2 class="sub-header">Step 1: 📸 Upload Your Room</h2>')
+    st.markdown('<h2 class="sub-header">Step 1: 📸 Upload Your Room</h2>', unsafe_allow_html=True)
     uploaded_file = st.file_uploader("Choose a photo...", type=["jpg", "jpeg", "png"])
     
     if uploaded_file is not None:
