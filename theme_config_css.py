@@ -2,24 +2,22 @@
 
 CSS_STYLES = """
 <style>
-    /* 1. Base Structure - Deep Charcoal instead of Blue to fix "too blue" issue */
+    /* 1. Main Background - Clean White */
     .stApp {
-        background: #121212; 
-        background-image: radial-gradient(circle at 20% 20%, #080742 0%, #121212 100%);
+        background: #ffffff;
         background-attachment: fixed;
-        color: #ffffff;
     }
 
-    /* 2. Main Header - Animated Multi-Tone Gradient */
+    /* 2. Animated Gradient Header - Original Colors (#2c3e50, #3498db, #9b59b6, #e74c3c) */
     .main-header {
-        font-size: 3.8rem;
-        background: linear-gradient(45deg, #5872EE, #FF8B8B, #FFBC94, #5872EE);
+        font-size: 3.5rem;
+        background: linear-gradient(45deg, #2c3e50, #3498db, #9b59b6, #e74c3c);
         background-size: 400% 400%;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         text-align: center;
         margin-bottom: 2rem;
-        font-weight: 800;
+        font-weight: 700;
         padding: 1rem;
         animation: gradientShift 8s ease infinite;
     }
@@ -30,107 +28,96 @@ CSS_STYLES = """
         100% { background-position: 0% 50%; }
     }
     
-    /* 3. Sub-header - Sharp Square Left Border (Peach Accent) */
+    /* 3. Sub-header - Sharp Square Left Border */
     .sub-header {
-        font-size: 2.2rem;
-        color: #FFBC94; 
-        border-left: 6px solid #FF8B8B;
-        padding-left: 20px;
+        font-size: 2rem;
+        color: #2c3e50;
+        border-left: 8px solid #3498db; /* Sharp Square Accent */
+        padding-left: 15px;
         margin-bottom: 2rem;
         font-weight: 600;
-        background: rgba(255, 255, 255, 0.03);
+        background: #f8f9fa;
     }
     
-    /* 4. Sharp Square Tabs - Fixed Right Space and Shapes */
+    /* 4. Square Tabs - No Circles, Clean Lines */
     .stTabs [data-baseweb="tab-list"] {
-        gap: 8px;
-        background: #1E1E1E;
-        padding: 10px;
-        border-radius: 4px; /* Sharp edges */
-        border: 1px solid #333333;
+        gap: 0px; /* Merged square look */
+        background: #f8f9fa;
+        padding: 0px;
+        border-radius: 0px; 
+        border: 1px solid #e1e8ed;
         width: fit-content !important;
     }
     
     .stTabs [data-baseweb="tab"] {
-        height: 50px;
-        background: #252525 !important;
-        border-radius: 4px !important; /* Square shape */
+        height: 55px;
+        background: #ffffff !important;
+        border-radius: 0px !important; /* Forces Square */
         padding: 10px 25px;
-        color: #888888 !important;
+        color: #2c3e50 !important;
         font-weight: 600;
-        transition: all 0.3s ease;
-        border: 1px solid transparent !important;
+        border: 1px solid #e1e8ed !important;
+        margin: 0px !important;
     }
     
-    .stTabs [data-baseweb="tab"]:hover {
-        color: #5872EE !important;
-        background: #2A2A2A !important;
-    }
-
-    /* Active Tab - Coral Underline with Blue Tint */
+    /* Square Selection Highlight with Original Blue Underline */
     .stTabs [aria-selected="true"] {
-        background: rgba(88, 114, 238, 0.15) !important;
-        color: #FFBC94 !important;
-        border-bottom: 4px solid #FF8B8B !important; /* Square sharp underline */
+        background: #3498db !important;
+        color: white !important;
+        border-bottom: 4px solid #2c3e50 !important;
     }
 
-    /* 5. Feature Cards - Square with Retro Shadow */
+    /* 5. Feature Cards - Original White/Gray Gradient with Square Corners */
     .feature-card {
-        background: #1E1E1E;
-        color: #ffffff;
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        color: #2c3e50;
         padding: 2.5rem;
-        border-radius: 4px; /* Square */
+        border-radius: 0px; /* Sharp Square */
         margin: 1.5rem 0;
-        border: 1px solid #333333;
-        box-shadow: 8px 8px 0px #5872EE; /* Sharp Offset Shadow */
+        box-shadow: 10px 10px 0px #3498db; /* Sharp offset shadow */
+        border: 1px solid #e1e8ed;
         transition: all 0.3s ease;
     }
     
     .feature-card:hover {
-        transform: translate(-4px, -4px);
-        box-shadow: 12px 12px 0px #FF8B8B; /* Switches color on hover */
+        transform: translate(-5px, -5px);
+        box-shadow: 15px 15px 0px #e74c3c; /* Red highlight on hover */
     }
 
-    /* 6. AI Results Box - Square Glass Morphism */
+    /* 6. AI Description Box - Square & Clean */
     .ai-description {
-        background: rgba(255, 255, 255, 0.03);
-        border-left: 5px solid #FFBC94;
-        border-right: 1px solid rgba(255, 255, 255, 0.1);
+        background: #f8f9fa;
+        border: 1px solid #e1e8ed;
+        border-left: 10px solid #3498db;
         padding: 2rem;
-        border-radius: 0px; /* Fully square */
-        margin: 1.5rem 0;
+        border-radius: 0px;
         font-style: italic;
-        color: #E0E0E0;
+        color: #2c3e50;
     }
 
-    /* 7. Enhanced Buttons - Square and Bold */
+    /* 7. Enhanced Square Buttons */
     .stButton button {
-        background: linear-gradient(135deg, #FF8B8B, #FFBC94);
-        color: #080742; /* Dark text for contrast */
+        background: #3498db;
+        color: white;
         border: none;
-        padding: 12px 30px;
-        border-radius: 4px; /* Square */
-        font-weight: 700;
-        box-shadow: 4px 4px 0px #5872EE;
+        padding: 15px 35px;
+        border-radius: 0px; /* Sharp Square */
+        font-weight: 600;
+        box-shadow: 5px 5px 0px #2c3e50;
         transition: all 0.2s ease;
     }
     
     .stButton button:hover {
+        background: #e74c3c;
         transform: translate(-2px, -2px);
-        box-shadow: 6px 6px 0px #ffffff;
-        background: linear-gradient(135deg, #FFBC94, #FF8B8B);
+        box-shadow: 7px 7px 0px #2c3e50;
     }
 
-    /* Inputs and Selectors */
-    .stSelectbox div[data-baseweb="select"] {
-        background-color: #1E1E1E;
-        border: 1px solid #333333;
-        border-radius: 4px;
-        color: white;
-    }
-    
-    .stSelectbox div[data-baseweb="select"]:focus {
-        border-color: #FFBC94;
+    /* Input fields - Original styling but Square */
+    .stTextArea textarea, .stTextInput input {
+        border-radius: 0px !important;
+        border: 2px solid #e1e8ed;
+        background: #ffffff;
     }
 </style>
 """
